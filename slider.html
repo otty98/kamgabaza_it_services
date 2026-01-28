@@ -1,0 +1,57 @@
+<style>
+    .banner{
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .banner .slider{
+        position: absolute;
+        width: 200px;
+        height: 250px;
+        top: 10%;
+        left: calc(50% - 100px);
+        transform-style: preserve-3d;
+        transform: perspective(1000px);
+    }
+
+    .banner .slider .item{
+        position: absolute;
+        inset: 0 0 0 0;
+        transform: translateZ(550px
+        );
+    }
+
+    .banner .slider .item img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover ;
+    }
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="banner">
+        <div class="slider">
+            <div class="item"><img src="assets/Screenshot 2025-11-19 072837.png" alt=""></div>
+            <div class="item"><img src="assets/Screenshot 2025-11-19 072837.png" alt=""></div>
+            <div class="item"><img src="assets/Screenshot 2025-11-19 072837.png" alt=""></div>
+            <div class="item"><img src="assets/Screenshot 2025-11-19 072837.png" alt=""></div>
+            <div class="item"><img src="assets/Screenshot 2025-11-19 072837.png" alt=""></div>
+            <div class="item"><img src="assets/Screenshot 2025-11-19 072837.png" alt=""></div>
+            <div class="item"><img src="assets/Screenshot 2025-11-19 072837.png" alt=""></div>
+            <div class="item"><img src="assets/Screenshot 2025-11-19 072837.png" alt=""></div>
+            <div class="item"><img src="assets/Screenshot 2025-11-19 072837.png" alt=""></div>
+            <div class="item"><img src="assets/Screenshot 2025-11-19 072837.png" alt=""></div>
+        </div>
+        
+    </div>
+</body>
+</html>
