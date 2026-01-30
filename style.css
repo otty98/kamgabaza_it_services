@@ -225,38 +225,104 @@ ul {
 }
 .outline-btn .arrow { display: inline-block; transform: translateY(2px); }
 
-/* Hero Visual */
-.hero-right { display: flex; justify-content: center; }
-.hero-visual { position: relative; width: 360px; height: 360px; transform: translate(40px, 30px); }
-.hero-circle {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #111 60%, #000 100%);
-    box-shadow: inset 0 0 0 12px rgba(255,255,255,0.06);
+/* Hero Visual - 3D Slider Integration */
+.hero-right { 
+    display: flex; 
+    justify-content: center; 
+    perspective: 1000px; /* Essential for 3D effect */
+    overflow: visible; /* Allow rotation to spill slightly if needed */
+}
+
+.hero-slider-container {
     position: relative;
-    z-index: 1;
+    width: 300px;
+    height: 300px;
+    transform-style: preserve-3d;
+    transform: translate(0, 20px); /* Adjust vertical position */
 }
-.hero-circle::before,
-.hero-circle::after {
-    content: "";
+
+.hero-slider {
     position: absolute;
-    border-radius: 50%;
-    border: 1px solid rgba(255,255,255,0.18);
+    width: 60px; /* Item width */
+    height: 80px; /* Item height */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform-style: preserve-3d;
+    animation: autoRun 20s linear infinite;
+    z-index: 2;
 }
-.hero-circle::before { inset: -22px; }
-.hero-circle::after  { inset: -60px; border-color: rgba(255,255,255,0.1); }
-.hero-image {
+
+@keyframes autoRun {
+    from {
+        transform: translate(-50%, -50%) rotateX(-10deg) rotateY(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotateX(-10deg) rotateY(360deg);
+    }
+}
+
+.slider-item {
+    position: absolute;
+    inset: 0;
+    transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(180px);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, background 0.3s;
+}
+
+.slider-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #fff;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.slider-item svg {
+    width: 32px;
+    height: 32px;
+    color: #fff;
+    opacity: 0.9;
+}
+
+/* Central Core Image */
+.hero-core {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 52%;
-    height: 52%;
-    object-fit: cover;
+    width: 140px;
+    height: 140px;
     border-radius: 50%;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-    z-index: 2;
+    background: radial-gradient(circle at 50% 50%, #222 0%, #000 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 50px rgba(255, 255, 255, 0.05);
+    z-index: 1;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.hero-core img {
+    width: 60%;
+    height: 60%;
+    object-fit: contain;
+    opacity: 0.8;
+}
+
+/* Removed old Hero Visual styles to avoid conflict, or overwrite them */
+.hero-visual { display: none; }
+
+/* Responsive adjustments for slider */
+@media (max-width: 768px) {
+    .hero-slider-container {
+        transform: scale(0.8) translate(0, 20px);
+    }
 }
 
 /* Sections General */
@@ -404,20 +470,23 @@ section {
 /* About - Redesigned */
 .about-section {
     background-color: var(--bg-color);
-    padding: 100px 0;
+    padding: 0; /* Remove padding as wrapper handles it */
 }
 
 .about-design-wrapper {
     background-color: #0b0b0b;
     color: #fff;
-    border-radius: 24px;
-    padding: 80px;
+    width: 100%; /* Full width */
+    padding: 100px 0; /* Vertical padding */
+    position: relative;
+    overflow: hidden;
+}
+
+.about-grid-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 80px;
     align-items: center;
-    position: relative;
-    overflow: hidden; /* Ensure content doesn't spill if animated */
 }
 
 .about-design-content {
@@ -461,9 +530,9 @@ section {
 /* Visual Stack */
 .about-design-visual {
     position: relative;
-    height: 500px; /* Defined height for absolute positioning */
+    height: 600px; /* Increased height for vertical stack */
     display: flex;
-    justify-content: center; /* Center the stack in the column */
+    justify-content: center; 
     align-items: center;
 }
 
@@ -474,12 +543,13 @@ section {
     border-radius: 16px;
     box-shadow: 0 20px 40px rgba(0,0,0,0.4);
     transition: all 0.5s ease;
+    left: 50%; /* Center horizontally */
 }
 
 .card-front {
     z-index: 3;
-    right: 0;
-    transform: translateX(0) translateY(0);
+    top: 40px;
+    transform: translateX(-50%);
     overflow: hidden;
 }
 
@@ -500,71 +570,63 @@ section {
     filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
 }
 
-/* Layered cards behind */
+/* Layered cards behind - Stacked Downwards */
 .card-back-1 {
     z-index: 2;
-    right: 40px; /* Offset left relative to front (which is at right:0 in flex? no absolute) */
-    /* Actually let's use right positioning to stack them */
+    top: 80px; /* 40px down */
     background-color: rgba(255, 255, 255, 0.1);
-    transform: scale(0.95) translateY(20px); /* Slightly smaller and lower */
+    transform: translateX(-50%) scale(0.95);
     backdrop-filter: blur(5px);
     border: 1px solid rgba(255,255,255,0.05);
 }
 
 .card-back-2 {
     z-index: 1;
-    right: 80px;
+    top: 120px; /* 80px down */
     background-color: rgba(255, 255, 255, 0.05);
-    transform: scale(0.9) translateY(40px);
+    transform: translateX(-50%) scale(0.9);
     border: 1px solid rgba(255,255,255,0.02);
 }
 
-/* Hover effect on visual to expand cards slightly */
+/* Hover effect on visual to expand cards vertically */
 .about-design-visual:hover .card-front {
-    transform: translateY(-10px);
+    transform: translateX(-50%) translateY(-10px);
 }
 .about-design-visual:hover .card-back-1 {
-    right: 60px;
-    transform: scale(0.95) translateY(25px) rotate(-2deg);
+    top: 90px;
+    transform: translateX(-50%) scale(0.95);
 }
 .about-design-visual:hover .card-back-2 {
-    right: 120px;
-    transform: scale(0.9) translateY(50px) rotate(-4deg);
+    top: 140px;
+    transform: translateX(-50%) scale(0.9);
 }
 
 /* Responsive */
 @media (max-width: 968px) {
-    .about-design-wrapper {
+    .about-grid-container {
         grid-template-columns: 1fr;
-        padding: 40px;
         gap: 60px;
         text-align: center;
     }
+
+    .about-design-wrapper {
+        padding: 60px 0;
+    }
     
     .about-design-visual {
-        height: 400px;
+        height: 500px;
         justify-content: center;
     }
     
     .stack-card {
         width: 280px;
         height: 380px;
-        left: 50%; /* Center horizontally */
-        right: auto;
-        margin-left: -140px; /* Half width */
+        /* left: 50% is inherited */
     }
     
-    .card-front {
-        /* Reset positioning for centered stack */
-    }
-    
-    .card-back-1 {
-        margin-left: -160px; /* Offset */
-    }
-    
-    .card-back-2 {
-        margin-left: -180px;
-    }
+    .card-front { top: 20px; }
+    .card-back-1 { top: 50px; }
+    .card-back-2 { top: 80px; }
 }
 
 @media (max-width: 480px) {
@@ -577,10 +639,11 @@ section {
     .stack-card {
         width: 240px;
         height: 320px;
-        margin-left: -120px;
     }
-    .card-back-1 { margin-left: -130px; }
-    .card-back-2 { margin-left: -140px; }
+    /* Adjust spacing for smaller cards */
+    .card-front { top: 10px; }
+    .card-back-1 { top: 35px; }
+    .card-back-2 { top: 60px; }
 }
 
 /* Contact */
