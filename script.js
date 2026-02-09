@@ -3,7 +3,30 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
     initSmoothScroll();
     initServicesEffect();
+    initCursorEffect();
 });
+
+function initCursorEffect() {
+    const dot = document.createElement('div');
+    dot.className = 'cursor-dot';
+    const outline = document.createElement('div');
+    outline.className = 'cursor-outline';
+    document.body.appendChild(dot);
+    document.body.appendChild(outline);
+
+    window.addEventListener('mousemove', (e) => {
+        const posX = e.clientX;
+        const posY = e.clientY;
+
+        dot.style.left = `${posX}px`;
+        dot.style.top = `${posY}px`;
+
+        outline.animate({
+            left: `${posX}px`,
+            top: `${posY}px`
+        }, { duration: 500, fill: "forwards" });
+    });
+}
 
 function initLogoAnimation() {
     const canvas = document.getElementById('logo-canvas');

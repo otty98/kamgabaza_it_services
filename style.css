@@ -20,6 +20,7 @@
 
 html {
     scroll-behavior: smooth;
+    cursor: none; /* Hide default cursor */
 }
 
 body {
@@ -28,6 +29,30 @@ body {
     color: var(--text-color);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Cursor */
+.cursor-dot,
+.cursor-outline {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-color);
+}
+
+.cursor-outline {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
 }
 
 /* Utilities */
@@ -53,7 +78,7 @@ ul {
     font-size: 1rem;
     font-weight: 500;
     border-radius: 4px;
-    cursor: pointer;
+    cursor: none; /* Custom cursor handles this */
     transition: var(--transition);
     border: 1px solid transparent;
 }
@@ -121,6 +146,7 @@ ul {
     font-weight: 500;
     font-size: 0.95rem;
     position: relative;
+    cursor: none; /* Custom cursor handles this */
 }
 
 .nav-list a::after {
@@ -142,7 +168,7 @@ ul {
     display: none;
     background: none;
     border: none;
-    cursor: pointer;
+    cursor: none; /* Custom cursor handles this */
     flex-direction: column;
     gap: 6px;
 }
@@ -165,7 +191,7 @@ ul {
     color: #fff;
     padding-top: 80px;
     position: relative;
-    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
 }
 
 .hero-layout {
@@ -217,6 +243,7 @@ ul {
     border-radius: 999px;
     padding: 12px 28px;
     font-weight: 500;
+    cursor: none;
 }
 .outline-btn:hover { 
     border-color: #fff; 
@@ -518,6 +545,7 @@ section {
     background-color: #fff;
     color: #000;
     border: none;
+    cursor: none;
 }
 
 .on-dark:hover {
@@ -684,6 +712,7 @@ section {
     font-size: 1rem;
     transition: var(--transition);
     background-color: var(--gray-light);
+    cursor: none;
 }
 
 .form-group input:focus,
@@ -765,6 +794,7 @@ section {
     color: rgba(255, 255, 255, 0.6);
     font-size: 0.95rem;
     transition: color 0.3s ease;
+    cursor: none;
 }
 
 .footer-col ul li a:hover {
@@ -842,5 +872,15 @@ section {
         border-left: none;
         border-top: 1px solid var(--border-color);
         padding-top: 40px;
+    }
+    
+    /* Disable custom cursor on mobile touch devices for better UX */
+    @media (hover: none) and (pointer: coarse) {
+        html, .btn, .nav-list a, .mobile-menu-btn, .outline-btn, .on-dark, .footer-col ul li a, .form-group input, .form-group textarea {
+            cursor: auto;
+        }
+        .cursor-dot, .cursor-outline {
+            display: none;
+        }
     }
 }
