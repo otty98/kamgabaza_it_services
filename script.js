@@ -4,7 +4,68 @@ document.addEventListener('DOMContentLoaded', () => {
     initSmoothScroll();
     initServicesEffect();
     initCursorEffect();
+    initFormHandler();
 });
+
+function initFormHandler() {
+    const form = document.getElementById('contactForm');
+    const statusDiv = document.getElementById('form-status');
+    
+    if (form) {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = form.querySelector('button[type="submit"]');
+            const originalBtnText = btn.innerText;
+            
+            // 1. Get data
+            const formData = new FormData(form);
+            
+            // 2. UI Loading State
+            btn.innerText = 'Sending...';
+            btn.disabled = true;
+            statusDiv.className = 'form-status'; // Reset
+            statusDiv.innerText = '';
+
+            // 3. Send to Formspree
+            const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xjgegebq'; 
+
+            try {
+                const response = await fetch(FORMSPREE_ENDPOINT, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    // Success
+                    statusDiv.classList.add('success');
+                    statusDiv.innerText = 'Thank you! Your message has been sent successfully.';
+                    form.reset();
+                } else {
+                    // Error from server
+                    const data = await response.json();
+                    if (Object.hasOwn(data, 'errors')) {
+                        statusDiv.classList.add('error');
+                        statusDiv.innerText = data["errors"].map(error => error["message"]).join(", ");
+                    } else {
+                        statusDiv.classList.add('error');
+                        statusDiv.innerText = 'Oops! There was a problem submitting your form.';
+                    }
+                }
+            } catch (error) {
+                // Network error
+                statusDiv.classList.add('error');
+                statusDiv.innerText = 'Oops! There was a problem submitting your form. Please check your internet connection.';
+            } finally {
+                // Reset button
+                btn.innerText = originalBtnText;
+                btn.disabled = false;
+            }
+        });
+    }
+}
 
 function initCursorEffect() {
     const dot = document.createElement('div');
@@ -336,14 +397,4 @@ function initSmoothScroll() {
             }
         });
     });
-    
-    // Form submission
-    const form = document.getElementById('contactForm');
-    if (form) {
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Thank you for your message. We will get back to you shortly.');
-            form.reset();
-        });
-    }
 }
