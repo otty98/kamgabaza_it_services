@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services | Kamgabaza Solutions</title>
+    <meta name="description" content="Detailed overview of Kamgabaza Solutions services: Managed IT, Web Development, Mobile Apps, and QA Testing.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .page-hero {
+            padding-top: 120px;
+            padding-bottom: 80px;
+            background: var(--bg-color);
+            position: relative;
+        }
+        .service-detail-section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .service-detail-section:last-child {
+            border-bottom: none;
+        }
+        .service-detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+        .service-info h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+        .service-info p {
+            margin-bottom: 20px;
+            line-height: 1.7;
+            color: var(--text-light);
+        }
+        .tech-stack-box {
+            background: var(--gray-light);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+        .tech-stack-box h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .tech-tag {
+            background: #fff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+            color: var(--primary-color);
+        }
+        .service-sub-links {
+            margin-top: 20px;
+            display: grid;
+            gap: 10px;
+        }
+        .sub-link-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-color);
+            padding: 10px;
+            background: #fff;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+        .sub-link-item:hover {
+            background: var(--gray-light);
+            transform: translateX(5px);
+            color: var(--primary-color);
+        }
+        @media (max-width: 768px) {
+            .service-detail-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-container">
+            <div class="logo-container">
+                <a href="index.html" style="text-decoration:none; display:flex; align-items:center; gap:10px;">
+                    <canvas id="logo-canvas" width="120" height="60"></canvas>
+                    <div class="logo-text">Kamgabaza Solutions</div>
+                </a>
+            </div>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html" class="active" style="color: var(--primary-color);">Services</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+                <button class="mobile-menu-btn" aria-label="Toggle menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="container">
+                <h1 class="hero-title" style="font-size: 3.5rem;">Our Expertise</h1>
+                <p class="hero-subtitle">Comprehensive IT solutions tailored for modern businesses.</p>
+            </div>
+        </section>
+
+        <!-- Managed IT Support -->
+        <section id="managed-support" class="service-detail-section">
+            <div class="container">
+                <div class="service-detail-grid">
+                    <div class="service-info">
+                        <h2>Managed IT Support</h2>
+                        <p>We provide proactive, 24/7 monitoring and maintenance of your IT infrastructure. Our managed services ensure that your systems are always up, secure, and running at peak performance.</p>
+                        <p>From helpdesk support to complex network management, we act as your dedicated IT department. We handle updates, security patches, and backups so you can focus on growing your business without technical distractions.</p>
+                        <a href="index.html#contact" class="btn primary-btn" style="margin-top: 20px;">Get Support</a>
+                    </div>
+                    <div class="tech-stack-box">
+                        <h3>Technology Stack</h3>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Windows Server</span>
+                            <span class="tech-tag">Linux / Ubuntu</span>
+                            <span class="tech-tag">Microsoft 365</span>
+                            <span class="tech-tag">Azure Cloud</span>
+                            <span class="tech-tag">AWS</span>
+                            <span class="tech-tag">Cisco Networking</span>
+                            <span class="tech-tag">Fortinet Security</span>
+                            <span class="tech-tag">Vmware</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Web Development -->
+        <section id="web-development" class="service-detail-section">
+            <div class="container">
+                <div class="service-detail-grid">
+                    <div class="service-info">
+                        <h2>Website Development</h2>
+                        <p>Your website is your digital storefront. We build fast, responsive, and SEO-optimized websites that convert visitors into customers. Our development process prioritizes user experience (UX) and clean, maintainable code.</p>
+                        <p>Whether you need a simple corporate brochure site, a complex web application, or a robust e-commerce platform, our team delivers solutions that align with your brand identity and business goals.</p>
+                        <a href="index.html#contact" class="btn primary-btn" style="margin-top: 20px;">Start a Project</a>
+                    </div>
+                    <div class="tech-stack-box">
+                        <h3>Technology Stack</h3>
+                        <div class="tech-tags">
+                            <span class="tech-tag">HTML5 & CSS3</span>
+                            <span class="tech-tag">JavaScript (ES6+)</span>
+                            <span class="tech-tag">Angular</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">WordPress</span>
+                            <span class="tech-tag">Shopify</span>
+                            <span class="tech-tag">PHP / Laravel</span>
+                            <span class="tech-tag">MySQL / MongoDB</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mobile App Development -->
+        <section id="mobile-development" class="service-detail-section">
+            <div class="container">
+                <div class="service-detail-grid">
+                    <div class="service-info">
+                        <h2>Mobile App Development</h2>
+                        <p>Reach your customers wherever they are with custom mobile applications. We design and develop intuitive apps for both iOS and Android platforms, ensuring a seamless experience across all devices.</p>
+                        <p>Our agile development approach allows for rapid prototyping and iteration, bringing your app idea to life quickly. We handle everything from UI/UX design to App Store submission and post-launch maintenance.</p>
+                        <a href="index.html#contact" class="btn primary-btn" style="margin-top: 20px;">Build Your App</a>
+                    </div>
+                    <div class="tech-stack-box">
+                        <h3>Technology Stack</h3>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Swift (iOS)</span>
+                            <span class="tech-tag">Kotlin (Android)</span>
+                            <span class="tech-tag">Ionic (Angular)</span>
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">RESTful APIs</span>
+                            <span class="tech-tag">GraphQL</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- QA & Testing -->
+        <section id="qa-testing" class="service-detail-section">
+            <div class="container">
+                <div class="service-detail-grid">
+                    <div class="service-info">
+                        <h2>Software Testing & QA</h2>
+                        <p>Quality is non-negotiable. Our comprehensive QA services ensure your software is bug-free, secure, and performs flawlessly under pressure. We employ both manual and automated testing strategies to cover every angle.</p>
+                        <p>Explore our specialized testing services below:</p>
+                        <div class="service-sub-links">
+                            <a href="qa-testing-services.html" class="sub-link-item">
+                                <span>→</span> QA Services Overview
+                            </a>
+                            <a href="automation-testing.html" class="sub-link-item">
+                                <span>→</span> Automation Testing
+                            </a>
+                            <a href="manual-testing.html" class="sub-link-item">
+                                <span>→</span> Manual Testing
+                            </a>
+                            <a href="api-testing.html" class="sub-link-item">
+                                <span>→</span> API Testing
+                            </a>
+                            <a href="selenium-testing.html" class="sub-link-item">
+                                <span>→</span> Selenium Testing
+                            </a>
+                        </div>
+                    </div>
+                    <div class="tech-stack-box">
+                        <h3>Technology Stack</h3>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Selenium WebDriver</span>
+                            <span class="tech-tag">Appium</span>
+                            <span class="tech-tag">Postman</span>
+                            <span class="tech-tag">JMeter</span>
+                            <span class="tech-tag">JUnit / TestNG</span>
+                            <span class="tech-tag">Jenkins (CI/CD)</span>
+                            <span class="tech-tag">JIRA</span>
+                            <span class="tech-tag">Python / Java</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>Kamgabaza Solutions</h3>
+                    <p>Your trusted partner for comprehensive IT services. We build, support, and assure the quality of your digital infrastructure.</p>
+                    <p class="footer-reg">Reg: 2025 / 084030 / 07</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="services.html#managed-support">Managed Support</a></li>
+                        <li><a href="services.html#web-development">Web Development</a></li>
+                        <li><a href="services.html#mobile-development">Mobile Apps</a></li>
+                        <li><a href="services.html#qa-testing">QA & Testing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:info@kamgabaza.co.za">info@kamgabaza.co.za</a></li>
+                        <li><a href="tel:+27123456789">+27 12 345 6789</a></li>
+                        <li>Johannesburg, South Africa</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Kamgabaza Solutions (Pty) Ltd. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/27123456789" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+        <span class="whatsapp-text">Chat with us</span>
+    </a>
+
+    <script src="script.js"></script>
+    <script>
+        // Cursor effect reuse
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            // Dot follows instantly
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+
+            // Outline follows with delay (handled by CSS transition usually, or JS animation)
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+        });
+    </script>
+    <!-- Add cursor elements if they exist in main layout but missing here. 
+         Wait, script.js might expect them. 
+         I should check index.html if it has cursor elements in body. -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+</body>
+</html>
