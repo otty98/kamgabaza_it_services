@@ -930,6 +930,13 @@ section {
     .hero-visual { width: 280px; height: 280px; transform: translate(0, 20px); }
     .hero-image { width: 56%; height: 56%; }
 
+    .hero-section {
+        height: auto;
+        min-height: calc(100vh - 80px);
+        padding-top: 100px;
+        clip-path: none;
+    }
+
     .footer-container {
         grid-template-columns: 1fr;
         gap: 40px;

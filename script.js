@@ -299,17 +299,23 @@ function initServicesEffect() {
     
     let started = false;
     let revealed = false;
+
+    if (!('IntersectionObserver' in window)) {
+        section.classList.add('services-revealed');
+        return;
+    }
+
     const observer = new IntersectionObserver(entries => {
         if (started) return;
         for (const e of entries) {
-            if (e.isIntersecting && e.intersectionRatio > 0.3) {
+            if (e.isIntersecting) {
                 started = true;
                 start();
                 observer.disconnect();
                 break;
             }
         }
-    }, { threshold: [0, 0.25, 0.5, 0.75, 1] });
+    }, { threshold: 0.1 });
     observer.observe(section);
     
     function start() {
