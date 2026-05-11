@@ -1,0 +1,11 @@
+{
+  "name": "kamgabaza-it-services",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "strip-logo-bg": "node scripts/strip-logo-bg.mjs"
+  },
+  "devDependencies": {
+    "sharp": "^0.33.5"
+  }
+}

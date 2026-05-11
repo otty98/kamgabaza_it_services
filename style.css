@@ -123,9 +123,12 @@ ul {
     justify-content: center;
 }
 
-#logo-canvas {
-    /* Dimensions controlled by JS/HTML, styling here for layout */
+.logo-img {
     display: block;
+    height: 48px;
+    width: auto;
+    max-width: 200px;
+    object-fit: contain;
 }
 
 .logo-text {
@@ -133,7 +136,7 @@ ul {
     font-weight: 500;
     letter-spacing: 0.05em;
     color: var(--text-light);
-    margin-top: -5px; /* Adjust spacing closer to canvas */
+    margin-top: 4px;
     margin-left: 2px;
 }
 
