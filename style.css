@@ -12,6 +12,31 @@
     --container-width: 1200px;
 }
 
+
+/* Firefox */
+body {
+  scrollbar-color: var(--accent-color) var(--gray-light);
+  scrollbar-width: thin;
+}
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--gray-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+  border-radius: 10px;
+  border: 2px solid var(--gray-light); /* gives it that clean "floating" look */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #333333; /* slightly lighter hover effect */
+}
 * {
     margin: 0;
     padding: 0;
@@ -53,6 +78,43 @@ body {
     width: 40px;
     height: 40px;
     border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+body.dark-cursor .cursor-dot {
+    background-color: #fff;
+}
+
+body.dark-cursor .cursor-outline {
+    border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.smoke {
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: smoke-fade 0.8s ease-out forwards;
+    z-index: 9998;
+    filter: blur(3px);
+}
+
+body.dark-cursor .smoke {
+    background: rgba(255, 255, 255, 0.35);
+    filter: blur(4px);
+    opacity: 0.95;
+}
+
+@keyframes smoke-fade {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+    100% {
+        transform: scale(3);
+        opacity: 0;
+    }
 }
 
 /* Utilities */

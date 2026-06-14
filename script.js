@@ -74,6 +74,45 @@ function initCursorEffect() {
     document.body.appendChild(dot);
     document.body.appendChild(outline);
 
+    function parseRgbColor(color) {
+        const match = color.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
+        if (!match) return null;
+        return {
+            r: Number(match[1]),
+            g: Number(match[2]),
+            b: Number(match[3]),
+            a: match[4] !== undefined ? Number(match[4]) : 1
+        };
+    }
+
+    function isDarkBackground(element) {
+        let node = element;
+
+        while (node && node !== document.documentElement) {
+            const style = window.getComputedStyle(node);
+            const bg = style.backgroundColor;
+
+            if (bg && bg !== 'transparent' && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'inherit') {
+                const rgb = parseRgbColor(bg);
+                if (rgb && rgb.a > 0) {
+                    const brightness = (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000;
+                    return brightness < 140;
+                }
+            }
+            node = node.parentElement;
+        }
+
+        return false;
+    }
+
+    function updateCursorColor(clientX, clientY) {
+        const target = document.elementFromPoint(clientX, clientY);
+        if (!target) return;
+
+        const shouldUseWhite = isDarkBackground(target);
+        document.body.classList.toggle('dark-cursor', shouldUseWhite);
+    }
+
     window.addEventListener('mousemove', (e) => {
         const posX = e.clientX;
         const posY = e.clientY;
@@ -84,7 +123,9 @@ function initCursorEffect() {
         outline.animate({
             left: `${posX}px`,
             top: `${posY}px`
-        }, { duration: 500, fill: "forwards" });
+        }, { duration: 500, fill: 'forwards' });
+
+        updateCursorColor(posX, posY);
     });
 }
 
@@ -254,6 +295,36 @@ function initMobileMenu() {
         });
     }
 }
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      if (entry.target.classList.contains("dark-section")) {
+        document.body.classList.add("dark-cursor");
+      } else {
+        document.body.classList.remove("dark-cursor");
+      }
+    }
+  });
+}, { threshold: 0.6 });
+
+document.querySelectorAll("section").forEach(section => {
+  observer.observe(section);
+});
+
+document.addEventListener("mousemove", (e) => {
+  const smoke = document.createElement("div");
+  smoke.className = "smoke";
+
+  smoke.style.left = e.clientX + "px";
+  smoke.style.top = e.clientY + "px";
+
+  document.body.appendChild(smoke);
+
+  setTimeout(() => {
+    smoke.remove();
+  }, 800);
+});
 
 function initSmoothScroll() {
     // Basic smooth scroll handled by CSS scroll-behavior: smooth
